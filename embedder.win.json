@@ -2,7 +2,7 @@
   "embedder": {
     "client_class": "OllamaClient",
     "model_kwargs": {
-      "model": "llama3"
+      "model": "qwen3:8b"
     }
   },
   "retriever": {

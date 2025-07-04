@@ -1,0 +1,28 @@
+services:
+  deepwiki:
+    image: ghcr.io/asyncfuncai/deepwiki-open:latest
+    container_name: deepwiki
+    ports:
+      - "${PORT:-8001}:${PORT:-8001}"  # API port
+      - "3000:3000"  # Next.js port
+    environment:
+      - PORT=${PORT:-8001}
+      - NODE_ENV=production
+      - SERVER_BASE_URL=http://localhost:${PORT:-8001}
+    volumes:
+      - $HOME/.adalflow:/root/.adalflow  # Persist repository and embedding data
+      - ./embedder.win.json:/app/api/config/embedder.json
+
+  ollama:
+    image: ollama/ollama
+    volumes:
+      - $HOME/.ollama/.ollama:/root/.ollama
+    network_mode: service:deepwiki
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+

@@ -11,7 +11,7 @@ services:
       - SERVER_BASE_URL=http://localhost:${PORT:-8001}
     volumes:
       - $HOME/.adalflow:/root/.adalflow  # Persist repository and embedding data
-      - ./embedder.json:/app/api/config/embedder.json
+      - ./embedder.mac.json:/app/api/config/embedder.json
 
   ollama:
     image: ollama/ollama
