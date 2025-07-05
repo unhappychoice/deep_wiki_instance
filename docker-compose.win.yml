@@ -12,6 +12,7 @@ services:
     volumes:
       - $HOME/.adalflow:/root/.adalflow  # Persist repository and embedding data
       - ./embedder.win.json:/app/api/config/embedder.json
+      - ./repo.json:/app/api/config/repo.json
 
   ollama:
     image: ollama/ollama
